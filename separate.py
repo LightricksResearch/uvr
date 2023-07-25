@@ -293,7 +293,7 @@ class SeperateMDX(SeperateAttributes):
         
         if not self.is_secondary_stem_only:
             self.write_to_console(f'{SAVING_STEM[0]}{self.primary_stem}{SAVING_STEM[1]}') if not self.is_secondary_model else None
-            primary_stem_path = os.path.join(self.export_path, f'{self.audio_file_base}_({self.primary_stem}).wav')
+            primary_stem_path = os.path.join(self.export_path, f'{self.audio_file_base}_{self.primary_stem}.wav')
             if not isinstance(self.primary_source, np.ndarray):
                 self.primary_source = spec_utils.normalize(source, self.is_normalization).T
             self.primary_source_map = {self.primary_stem: self.primary_source}
@@ -301,7 +301,7 @@ class SeperateMDX(SeperateAttributes):
 
         if not self.is_primary_stem_only:
             self.write_to_console(f'{SAVING_STEM[0]}{self.secondary_stem}{SAVING_STEM[1]}') if not self.is_secondary_model else None
-            secondary_stem_path = os.path.join(self.export_path, f'{self.audio_file_base}_({self.secondary_stem}).wav')
+            secondary_stem_path = os.path.join(self.export_path, f'{self.audio_file_base}_{self.secondary_stem}.wav')
             if not isinstance(self.secondary_source, np.ndarray):
                 raw_mix = self.demix_base(raw_mix, is_match_mix=True)[0] if mdx_net_cut else raw_mix
                 self.secondary_source, raw_mix = spec_utils.normalize_two_stem(source*self.compensate, raw_mix, self.is_normalization)
