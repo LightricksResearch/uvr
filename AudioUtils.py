@@ -1,7 +1,7 @@
-from ModelData import *
+from .ModelData import *
 import librosa
 import torch
-from separate import SeperateMDX
+from .separate import SeperateMDX
 from pydub import AudioSegment
 
 

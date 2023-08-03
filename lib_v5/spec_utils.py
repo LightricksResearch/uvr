@@ -6,7 +6,6 @@ import random
 import math
 import platform
 import traceback
-from . import pyrb
 #cur
 OPERATING_SYSTEM = platform.system()
 SYSTEM_ARCH = platform.platform()

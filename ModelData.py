@@ -1,7 +1,7 @@
-from gui_data.constants import *
 import os
 import json
 import hashlib
+from .gui_data.constants import *
 
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 MODELS_DIR = os.path.join(BASE_PATH, 'models')
