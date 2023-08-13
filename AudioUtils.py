@@ -3,6 +3,7 @@ import librosa
 import torch
 from .separate import SeperateMDX
 from pydub import AudioSegment
+from pathlib import Path
 
 
 class AudioUtils:
@@ -34,8 +35,21 @@ class AudioUtils:
         torch.cuda.empty_cache()
 
     @staticmethod
-    def merge(path1, path2):
-        audio1 = AudioSegment.from_file(path1)
-        audio2 = AudioSegment.from_file(path2)
+    def merge(first_audio, second_audio, output_path):
+        audio1 = AudioSegment.from_file(first_audio)
+        audio2 = AudioSegment.from_file(second_audio)
         merged_audio = audio1.overlay(audio2)
-        merged_audio.export('merged.wav', format='wav')
+        merged_audio.export(output_path, format='wav')
+
+# if __name__ == "__main__":
+#     base_dir = Path(__file__).parent.resolve()
+#     test_output =  base_dir/ "output"
+#     input_path =  base_dir / "flowers_short.wav"
+#     vocal_output_path = test_output / f"{input_path.stem}_Vocals.wav"
+#     test_output.mkdir(exist_ok=True)
+#     AudioUtils.split(str(input_path), str(test_output))
+#     instrumental_output_path = test_output / f"{input_path.stem}_Instrumental.wav"
+#     AudioUtils.merge(vocal_output_path, instrumental_output_path,  test_output/ "")
+
+
+    
