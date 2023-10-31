@@ -12,7 +12,11 @@ class AudioUtils:
         pass
 
     @staticmethod
-    def split(audio_path, export_path='', model: ModelData = ModelData('UVR-MDX-NET Inst HQ 1', MDX_ARCH_TYPE)):
+    def split(audio_path, export_path='', model: ModelData = ModelData('UVR-MDX-NET Inst HQ 1', MDX_ARCH_TYPE), vocals_only: bool = False):
+        if vocals_only:
+            model.is_secondary_stem_only = True # Note - this secondary == vocals isn't generally true, but it is for the default.
+            # model.is_primary_model_secondary_stem_only = True
+            
         librosa.load(audio_path, duration=3, mono=False, sr=44100)
         audio_file_base = os.path.splitext(os.path.basename(audio_path))[0]
         process_data = {

@@ -297,6 +297,7 @@ class SeperateMDX(SeperateAttributes):
             if not isinstance(self.primary_source, np.ndarray):
                 self.primary_source = spec_utils.normalize(source, self.is_normalization).T
             self.primary_source_map = {self.primary_stem: self.primary_source}
+            print(f"writing to primary_stem_path: {primary_stem_path}")
             self.write_audio(primary_stem_path, self.primary_source, samplerate, self.secondary_source_primary)
 
         if not self.is_primary_stem_only:
@@ -312,6 +313,7 @@ class SeperateMDX(SeperateAttributes):
                     self.secondary_source = (-self.secondary_source.T+raw_mix.T)
 
             self.secondary_source_map = {self.secondary_stem: self.secondary_source}
+            print(f"writing to secondary_stem_path: {secondary_stem_path}")
             self.write_audio(secondary_stem_path, self.secondary_source, samplerate, self.secondary_source_secondary)
 
         torch.cuda.empty_cache()
