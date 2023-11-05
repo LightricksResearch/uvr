@@ -26,7 +26,7 @@ class ModelData:
                  is_primary_model_primary_stem_only=False,
                  is_primary_model_secondary_stem_only=False):
 
-        self.is_gpu_conversion = -1
+        self.is_gpu_conversion = 0
         self.is_normalization = False
         self.is_primary_stem_only = False
         self.is_secondary_stem_only = False
