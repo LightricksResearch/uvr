@@ -18,7 +18,6 @@ import gzip
 import librosa
 import math
 import numpy as np
-import onnxruntime as ort
 import os
 import torch
 import warnings
@@ -263,7 +262,7 @@ class SeperateAttributes:
 
 class SeperateMDX(SeperateAttributes):        
 
-    def seperate(self):
+    def seperate(self, ort_inferencer):
         samplerate = 44100
           
         if self.primary_model_name == self.model_basename and self.primary_sources:
@@ -277,8 +276,7 @@ class SeperateMDX(SeperateAttributes):
                 separator = MdxnetSet.ConvTDFNet(**model_params)
                 self.model_run = separator.load_from_checkpoint(self.model_path).to(self.device).eval()
             else:
-                ort_ = ort.InferenceSession(self.model_path, providers=self.run_type)
-                self.model_run = lambda spek:ort_.run(None, {'input': spek.cpu().numpy()})[0]
+                self.model_run = lambda spek:ort_inferencer.run(None, {'input': spek.cpu().numpy()})[0]
 
             self.initialize_model_settings()
             self.running_inference_console_write()
